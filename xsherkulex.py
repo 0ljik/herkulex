@@ -221,10 +221,10 @@ class herkulex:
         self.ser.write(self.__dataEx)
         sleep(0.001)
 
-    def readData(self):
-        i = 0;
-        beginsave=0;
-        Time_Counter=0;
+    def readData(self, size):
+        self.__dataEx = self.ser.read(size)
+
+        """
         while((self.ser.inWaiting() < size) & (Time_Counter < TIME_OUT)){
         		Time_Counter++;
         		sleep(0.0001);  //wait 1 millisecond for 10 times
@@ -241,7 +241,7 @@ class herkulex:
 				   i++;
 			}
 		}
-		SwSerial.flush()
+		SwSerial.flush()"""
 
 
     def clearBuffer(self):
