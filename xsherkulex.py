@@ -221,7 +221,7 @@ class herkulex:
         # self.ser.read()
         self.clearBuffer()  # clear the serialport buffer - try to do it!
         print('buffcld')
-        self.ser.write(self.__dataEx)
+        self.ser.write(self.__dataEx[:self._pSize])
         sleep(0.001)
 
     def readData(self, size):
