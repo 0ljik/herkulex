@@ -104,7 +104,7 @@ class herkulex:
         self.__lengthString = 2
 
         self.__ck1 = (self.__dataEx[2] ^ self.__dataEx[3] ^
-                     self.__dataEx[4] ^ self.__dataEx[7] ^ self.__dataEx[8]) & 0xFE
+                      self.__dataEx[4] ^ self.__dataEx[7] ^ self.__dataEx[8]) & 0xFE
         self.__ck2 = self.__checksum2()
 
         if (self.__ck1 != self.__dataEx[5]):
@@ -124,7 +124,8 @@ class herkulex:
         self.__data[2] = 0x60               # 10. 0x60=Torque ON
         self.__lengthString = 3             # lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
         self.__dataEx[0] = 0xFF			# Packet Header
         self.__dataEx[1] = 0xFF			# Packet Header
@@ -148,7 +149,8 @@ class herkulex:
         self.__data[2] = 0x00               # 10. 0x00=Torque Free
         self.__lengthString = 3             # lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -161,7 +163,6 @@ class herkulex:
         self.__dataEx[7] = self.__data[0] 		# Address 52
         self.__dataEx[8] = self.__data[1] 		# Length
         self.__dataEx[9] = self.__data[2]  # length
-
 
         self.__sendData()
 
@@ -176,7 +177,8 @@ class herkulex:
         self.__data[2] = valueACK
         self.__lengthString = 3             # lengthData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -200,7 +202,8 @@ class herkulex:
         self.__data[1] = 0x01               # 9. Lenght
         self.__lengthString = 2             # lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -224,7 +227,8 @@ class herkulex:
         self.__data[0] = self.__dataEx[7]       # 8. 1st byte
         self.__lengthString = 1                # lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         if (self.__ck1 != self.__dataEx[5]):
@@ -243,7 +247,8 @@ class herkulex:
         self.__data[2] = ID_New             # 10. ServoID NEW
         self.__lengthString = 3             # lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -270,7 +275,8 @@ class herkulex:
 
         self.__lengthString = 4             # lengthData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -350,7 +356,8 @@ class herkulex:
         self.__playTime = int(float(pTime) / 11.2)  # 8. Execution time
 
         self.__pID = 0xFE ^ self.__playTime
-        self.__ck1 = self.__checksum1(self.__moveData, self.__conta)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__moveData, self.__conta)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__pID = 0xFE
@@ -383,7 +390,8 @@ class herkulex:
 
         self.__lengthString = 2             # lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -412,7 +420,8 @@ class herkulex:
         self.__data[5] = self.__dataEx[12]
         self.__lengthString = 6
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         if (self.__ck1 != self.__dataEx[5]):
@@ -456,7 +465,8 @@ class herkulex:
         self.__data[2] = valueLed           # 10.LedValue
         self.__lenghtString = 3               # lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -484,7 +494,8 @@ class herkulex:
 
         self.__lengthString = 2             # lengthData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -513,7 +524,8 @@ class herkulex:
         self.__data[5] = self.__dataEx[12]
         self.__lengthString = 6
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         if (self.__ck1 != self.__dataEx[5]):
@@ -525,7 +537,6 @@ class herkulex:
 
         return speedy
 
-
 # move one servo with continous rotation
     def moveSpeedOne(self, servoID, Goal, pTime, iLed):
         if (Goal > 1023 or Goal < -1023):
@@ -533,7 +544,7 @@ class herkulex:
         if ((pTime < 0) or (pTime > 2856)):
             return
 
-        GoalSpeedSign
+        GoalSpeedSign = 0
         if (Goal < 0):
             GoalSpeedSign = (-1) * Goal
             GoalSpeedSign |= 0x4000  # bit n�14
@@ -560,7 +571,8 @@ class herkulex:
 
         self.__lengthString = 4             					# lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__pID = servoID
@@ -609,7 +621,8 @@ class herkulex:
 
         self.__lengthString = 4             				# lengthData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__pID = servoID
@@ -630,11 +643,11 @@ class herkulex:
         self.__sendData()
 
 # move one servo to an angle between -160 and 160
-    def moveOneAngle(int servoID, float angle, int pTime, int iLed):
-    	if (angle > 160.0or angle < -160.0):
+    def moveOneAngle(self, servoID, angle, pTime, iLed):
+        if (angle > 160.0or angle < -160.0):
             return
-    	position = int(angle / 0.325) + 512
-    	moveOne(servoID, position, pTime, iLed)
+        position = int(angle / 0.325) + 512
+        self.moveOne(servoID, position, pTime, iLed)
 
 # write registry in the RAM: one byte
     def writeRegistryRAM(self, servoID, address, writeByte):
@@ -647,7 +660,8 @@ class herkulex:
 
         self.__lengthString = 3             	# lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -675,7 +689,8 @@ class herkulex:
 
         self.__lengthString = 3           	 # lenghtData
 
-        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)  # 6. Checksum1
+        self.__ck1 = self.__checksum1(
+            self.__data, self.__lengthString)  # 6. Checksum1
         self.__ck2 = self.__checksum2()  # 7. Checksum2
 
         self.__dataEx[0] = 0xFF			# Packet Header
@@ -707,7 +722,7 @@ class herkulex:
     def __checksum2(self):
         return (~self.__XOR) & 0xFE
 
-    def __addData(GoalLSB, GoalMSB, set, servoID):
+    def __addData(self, GoalLSB, GoalMSB, set, servoID):
         self.__moveData[self.__conta] = GoalLSB
         self.__conta += 1
         self.__moveData[self.__conta] = GoalMSB
