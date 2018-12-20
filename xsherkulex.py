@@ -75,8 +75,45 @@ class herkulex:
             print('torqon')
             sleep(0.01)
         except Exception as e:
-            print('e' + e
-                  )
+            print('e' + e)
+
+    def stat(self, servoID):
+        self._pSize = 0x07  # 3.Packet size
+        self._pID = servoID  # 4.Servo ID - 0XFE=All servos
+        self._cmd = self.__HSTAT  # 5.CMD
+
+        self._ck1 = (self._pSize ^ self._pID ^ self._cmd) & 0xFE
+        self._ck2 = (~(self._pSize ^ self._pID ^ self._cmd)) & 0xFE
+
+        self.__dataEx[0] = 0xFF			# Packet Header
+        self.__dataEx[1] = 0xFF			# Packet Header
+        self.__dataEx[2] = self._pSize	 		# Packet Size
+        self.__dataEx[3] = self._pID			# Servo ID
+        self.__dataEx[4] = self._cmd			# Command Ram Write
+        self.__dataEx[5] = self._ck1			# Checksum 1
+        self.__dataEx[6] = self._ck2			# Checksum 2
+
+        self.sendData()
+        sleep(0.002)
+        self.readData(9) 				# read 9 bytes from serial
+
+        self._pSize = self.__dataEx[2]           # 3.Packet size 7-58
+        self._pID = self.__dataEx[3]           # 4. Servo ID
+        self._cmd = self.__dataEx[4]           # 5. CMD
+        self.__data[0] = self.__dataEx[7]
+        self.__data[1] = self.__dataEx[8]
+        self._lengthString = 2
+
+        self._ck1 = (self.__dataEx[2] ^ self.__dataEx[3] ^
+                     self.__dataEx[4] ^ self.__dataEx[7] ^ self.__dataEx[8]) & 0xFE
+        self._ck2 = self.checksum2()
+
+        if (self._ck1 != self.__dataEx[5]):
+            return -1   # checksum verify
+        if (self._ck2 != self.__dataEx[6]):
+            return -2
+
+        return self.__dataEx[7]			# return status
 
     def torqueON(self, servoID):
         self._pSize = 0x0A               # 3.Packet size 7-58

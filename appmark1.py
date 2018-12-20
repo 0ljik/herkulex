@@ -10,6 +10,7 @@ for p in range(len(ports)):
 print('Select port from list')
 p = ports[int(input())]
 herkulex = herkulex(p, 115200)
+herkulex.initialize()
 # herkulex.torqueON(1)
 sleep(0.01)
 herkulex.setLed(2, herkulex._herkulex__LED_GREEN2)
