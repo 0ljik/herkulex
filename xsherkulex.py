@@ -181,7 +181,7 @@ class herkulex:
 
     def setLed(self, servoID, valueLed):
         self._pSize = 0x0A               # 3.Packet size 7-58
-        self._pID = self.servoID            # 4. Servo ID
+        self._pID = servoID            # 4. Servo ID
         self._cmd = self.__HRAMWRITE          # 5. CMD
         self.__data[0] = 0x35               # 8. Address 53
         self.__data[1] = 0x01               # 9. Lenght
@@ -226,25 +226,6 @@ class herkulex:
 
     def readData(self, size):
         self.__dataEx = self.ser.read(size)
-
-        """
-        while((self.ser.inWaiting() < size) & (Time_Counter < TIME_OUT)){
-        		Time_Counter++;
-        		sleep(0.0001);  //wait 1 millisecond for 10 times
-		}
-
-		while (ser.inWaiting() > 0){
-			inchar = (byte)SwSerial.read();
-			if ( (inchar == 0xFF) & ((byte)SwSerial.peek() == 0xFF) ){
-					beginsave=1;
-					i=0; 				 # if found new header, begin again
-			}
-			if (beginsave==1 && i<size) {
-				   dataEx[i] = inchar;
-				   i++;
-			}
-		}
-		SwSerial.flush()"""
 
     def clearBuffer(self):
         self.ser.reset_input_buffer()
