@@ -66,11 +66,11 @@ class herkulex:
             self.__conta = 0
             self.__lengthString = 0
             sleep(0.1)
-            self.__clearError(self.__BROADCAST_ID)
+            self.clearError(self.__BROADCAST_ID)
             sleep(0.01)
-            self.__ACK(1)
+            self.ACK(1)
             sleep(0.01)
-            self.__torqueON(self.__BROADCAST_ID)
+            self.torqueON(self.__BROADCAST_ID)
             sleep(0.01)
         except Exception as e:
             print('e' + e)
@@ -78,7 +78,7 @@ class herkulex:
     #  stat
     def stat(self, servoID):
         self.__pSize = 0x07  # 3.Packet size
-        self.__pID = servoID  # 4.Servo ID - 0XFE=All servos
+        self.__pID = servoID  # 4.Servo ID - 0xFE=All servos
         self.__cmd = self.__HSTAT  # 5.CMD
 
         self.__ck1 = (self.__pSize ^ self.__pID ^ self.__cmd) & 0xFE
@@ -301,8 +301,8 @@ class herkulex:
         iStop = 0  # stop=0
 
         # Position definition
-        posLSB = Goal & 0X00FF				# MSB Pos
-        posMSB = (Goal & 0XFF00) >> 8			# LSB Pos
+        posLSB = Goal & 0x00FF				# MSB Pos
+        posMSB = (Goal & 0xFF00) >> 8			# LSB Pos
 
         # led
         SetValue = iStop + iMode * 2 + \
@@ -335,7 +335,7 @@ class herkulex:
         else:
             GoalSpeedSign = Goal
 
-        speedGoalLSB = GoalSpeedSign & 0X00FF 	      		 # MSB speedGoal
+        speedGoalLSB = GoalSpeedSign & 0x00FF 	      		 # MSB speedGoal
         speedGoalMSB = (GoalSpeedSign & 0xFF00) >> 8        # LSB speedGoal
 
         # led
@@ -550,7 +550,7 @@ class herkulex:
             GoalSpeedSign |= 0x4000  # bit n�14
         else:
             GoalSpeedSign = Goal
-        speedGoalLSB = GoalSpeedSign & 0X00FF 		       # MSB speedGoal
+        speedGoalLSB = GoalSpeedSign & 0x00FF 		       # MSB speedGoal
         speedGoalMSB = (GoalSpeedSign & 0xFF00) >> 8      # LSB speedGoal
 
         # led
