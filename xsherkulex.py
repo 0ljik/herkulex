@@ -103,8 +103,9 @@ class herkulex:
         self.__data[1] = self.__dataEx[8]
         self.__lengthString = 2
 
-        self.__ck1 = (self.__dataEx[2] ^ self.__dataEx[3] ^
-                      self.__dataEx[4] ^ self.__dataEx[7] ^ self.__dataEx[8]) & 0xFE
+        self.__ck1 = self.__checksum1(self.__data, self.__lengthString)
+        #(self.__dataEx[2] ^ self.__dataEx[3] ^
+                      #self.__dataEx[4] ^ self.__dataEx[7] ^ self.__dataEx[8]) & 0xFE
         self.__ck2 = self.__checksum2()
 
         if (self.__ck1 != self.__dataEx[5]):
@@ -112,7 +113,7 @@ class herkulex:
         if (self.__ck2 != self.__dataEx[6]):
             return -2
 
-        return self.__dataEx[7]			# return status
+        return self.__dataEx[0]     		# return status
 
     # torque on -
     def torqueON(self, servoID):
@@ -738,7 +739,9 @@ class herkulex:
         sleep(0.001)
 
     def __readData(self, size):
-        self.__dataEx = self.__ser.read(size)
+         data = self.__ser.read(size)
+         for i in range(len(data)):
+             self.__dataEx[i] = data[i]
 
     def __clearBuffer(self):
         self.__ser.reset_input_buffer()
