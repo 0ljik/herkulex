@@ -18,13 +18,15 @@ class herkulex:
     __HREBOOT = 0x09  # Reboot
 
     # HERKULEX LED - See Manual p29
-    __LED_GREEN = 0x01
-    __LED_BLUE = 0x02
-    __LED_CYAN = 0x03
-    __LED_RED = 0x04
-    __LED_GREEN2 = 0x05
-    __LED_PINK = 0x06
-    __LED_WHITE = 0x07
+    __LED_DICTSET={'LED_GREEN':0x01,
+                'LED_GREEN' : 0x01,
+                'LED_BLUE' : 0x02,
+                'LED_CYAN' : 0x03,
+                'LED_RED' : 0x04,
+                'LED_GREEN2' : 0x05,
+                'LED_PINK' : 0x06,
+                'LED_WHITE' : 0x07}
+
     __ledset = [[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]]
 
     # HERKULEX STATUS ERROR - See Manual p39
@@ -463,7 +465,7 @@ class herkulex:
         self.__cmd = self.__HRAMWRITE          # 5. CMD
         self.__data[0] = 0x35               # 8. Address 53
         self.__data[1] = 0x01               # 9. Lenght
-        self.__data[2] = valueLed           # 10.LedValue
+        self.__data[2] = self.__LED_DICTSET{valueLed}           # 10.LedValue
         self.__lenghtString = 3               # lenghtData
 
         self.__ck1 = self.__checksum1(
