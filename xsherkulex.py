@@ -1,7 +1,6 @@
 import serial
 from time import sleep
 
-
 class herkulex:
     __DATA_SIZE = 30		# buffer for input data
     __DATA_MOVE = 50		# max 10 servos <---- change this for more servos!
@@ -16,7 +15,6 @@ class herkulex:
     __HSTAT = 0x07  # Read error
     __HROLLBACK = 0x08  # Back to factory value
     __HREBOOT = 0x09  # Reboot
-
     # HERKULEX LED - See Manual p29
     __LED_DICTSET={'LED_GREEN':0x01,
                 'LED_GREEN' : 0x01,
@@ -25,7 +23,7 @@ class herkulex:
                 'LED_RED' : 0x04,
                 'LED_GREEN2' : 0x05,
                 'LED_PINK' : 0x06,
-                'LED_WHITE' : 0x07}
+                'LED_WHITE' : 0x07,}
 
     __ledset = [[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]]
 
@@ -464,8 +462,8 @@ class herkulex:
         self.__pID = servoID            # 4. Servo ID
         self.__cmd = self.__HRAMWRITE          # 5. CMD
         self.__data[0] = 0x35               # 8. Address 53
-        self.__data[1] = 0x01               # 9. Lenght
-        self.__data[2] = self.__LED_DICTSET{valueLed}           # 10.LedValue
+        self.__data[1] = 0x01               # 9. Length
+        self.__data[2] = self.__LED_DICTSET[valueLed]           # 10.LedValue
         self.__lenghtString = 3               # lenghtData
 
         self.__ck1 = self.__checksum1(
